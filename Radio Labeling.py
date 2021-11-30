@@ -86,7 +86,6 @@ def main():
 # Return a 2D array
 def distanceMatrix(graph):
   # Initialize to infinity
-  distance = []
   order = len(graph)
   distance = numpy.full((order, order), numpy.inf)
   # Set distance from vertex to itself as 0
