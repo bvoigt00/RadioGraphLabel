@@ -55,15 +55,19 @@ g5 = [
 ]
 l5 = [4, 1, 6, 3]
 
+
+
 #########################
 ## Starting Conditions ##
 #########################
 
-graph = g5
-proposedLabeling = l5
+graph = g1
+proposedLabeling = l1
 
 lineLength = 6
 
+# Mode = [Validate, Generate]
+mode = "Validate"
 detailedDebug = False
 
 ########################
@@ -71,16 +75,18 @@ detailedDebug = False
 ########################
 
 def main():
-  lineRadioLabeling = generateRadioLabelingForLine(lineLength)
-  lineRadioNumber = numpy.amax(lineRadioLabeling)
-  print(f"The radio number for a path consisting of {lineLength} vertices is {lineRadioNumber}")
-
-  isValid = checkValidLabeling(graph, proposedLabeling)
-  if isValid:
-    print("The proposed labeling is a valid radio labeling")
+  if mode == "Generate":
+    lineRadioLabeling = generateRadioLabelingForLine(lineLength)
+    lineRadioNumber = numpy.amax(lineRadioLabeling)
+    print(f"The radio number for a path consisting of {lineLength} vertices is {lineRadioNumber}")
+  elif mode == "Validate":
+    isValid = checkValidLabeling(graph, proposedLabeling)
+    if isValid:
+      print("The proposed labeling is a valid radio labeling")
+    else:
+      print("The proposed labeling is not a valid radio labeling")
   else:
-    print("The proposed labeling is not a valid radio labeling")
-
+    print("A proper mode was not selected, set the mode to either 'Validate' or 'Generate' and try again")
 
 # Floyd's Algorithm
 # Return a 2D array
